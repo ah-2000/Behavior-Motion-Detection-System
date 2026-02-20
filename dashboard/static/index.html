@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Behavior Detection — Surveillance Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <span class="logo-icon">🛡️</span>
+                <h1>AI Behavior Detection</h1>
+            </div>
+            <div class="system-status" id="systemStatus">
+                <span class="status-dot offline"></span>
+                <span class="status-text">Offline</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="stat-pill">
+                <span class="stat-label">FPS</span>
+                <span class="stat-value" id="fpsValue">0</span>
+            </div>
+            <div class="stat-pill">
+                <span class="stat-label">Persons</span>
+                <span class="stat-value" id="personCount">0</span>
+            </div>
+            <div class="stat-pill alert-count">
+                <span class="stat-label">Alerts</span>
+                <span class="stat-value" id="alertCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <main class="dashboard">
+        <!-- Left: Live Video Feed -->
+        <section class="panel video-panel">
+            <div class="panel-header">
+                <h2>📹 Live Feed</h2>
+                <div class="panel-controls">
+                    <button class="btn-icon" id="toggleZones" title="Toggle Zones">🗺️</button>
+                    <button class="btn-icon" id="toggleSkeleton" title="Toggle Skeleton">🦴</button>
+                    <button class="btn-icon recording" id="recordBtn" title="Record">⏺️</button>
+                </div>
+            </div>
+            <div class="video-container">
+                <canvas id="videoCanvas"></canvas>
+                <div class="video-overlay" id="videoOverlay">
+                    <span>Connecting to video stream...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Column -->
+        <div class="right-column">
+            <!-- Alerts Panel -->
+            <section class="panel alerts-panel">
+                <div class="panel-header">
+                    <h2>🚨 Alerts</h2>
+                    <button class="btn-sm" id="clearAlerts">Clear</button>
+                </div>
+                <div class="alerts-list" id="alertsList">
+                    <div class="empty-state">No alerts yet</div>
+                </div>
+            </section>
+
+            <!-- Tracked Persons Panel -->
+            <section class="panel persons-panel">
+                <div class="panel-header">
+                    <h2>👤 Tracked Persons</h2>
+                </div>
+                <div class="persons-list" id="personsList">
+                    <div class="empty-state">No persons detected</div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Bottom Row -->
+        <section class="panel behavior-panel">
+            <div class="panel-header">
+                <h2>📊 Behavior Scores</h2>
+            </div>
+            <div class="behavior-grid" id="behaviorGrid">
+                <div class="empty-state">Waiting for data...</div>
+            </div>
+        </section>
+
+        <!-- Evidence Panel -->
+        <section class="panel evidence-panel">
+            <div class="panel-header">
+                <h2>📁 Evidence Clips</h2>
+                <button class="btn-sm" id="refreshEvidence">Refresh</button>
+            </div>
+            <div class="evidence-list" id="evidenceList">
+                <div class="empty-state">No evidence recorded</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Register Person Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Register New Person</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="personName" placeholder="Enter person's name" required>
+                </div>
+                <div class="form-group">
+                    <label>Face Photo</label>
+                    <input type="file" id="personPhoto" accept="image/*" required>
+                </div>
+                <button type="submit" class="btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Alert Sound -->
+    <audio id="alertSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=" type="audio/wav">
+    </audio>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

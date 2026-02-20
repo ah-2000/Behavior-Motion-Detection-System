@@ -1,0 +1,39 @@
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+
+# Model files (large binaries)
+*.pt
+*.pth
+*.task
+models/
+
+# Logs
+*.log
+alerts.log
+
+# Evidence clips (large video files)
+evidence/
+
+# Known faces (personal data)
+known_faces/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Environment variables
+.env
